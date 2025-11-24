@@ -236,7 +236,7 @@ export const QUESTIONS: Question[] = [
 	},
 	{
 		question: "Qual o menor estado do Brasil em território?",
-		options: ["Alagoas", "Sergipe", "Rio de Janeiro"],
+		options: ["Alagoas", "Espírito Santo", "Rio de Janeiro"],
 		correct: "Sergipe",
 	},
 	{
