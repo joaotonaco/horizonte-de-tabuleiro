@@ -4,3 +4,33 @@
 @theme {
 	--font-playful: "DynaPuff", cursive;
 }
+
+.puffy-text {
+	text-shadow:
+		0px 3px 0px #9f9f9f,
+		0px 6px 4px rgba(0, 0, 0, 0.3);
+}
+
+.puffy-text-yellow {
+	text-shadow:
+		0px 3px 0px #dba11c,
+		0px 6px 4px rgba(0, 0, 0, 0.3);
+}
+
+.puffy-text-blue {
+	text-shadow:
+		0px 3px 0px #2563eb,
+		0px 6px 4px rgba(0, 0, 0, 0.3);
+}
+
+.puffy-text-red {
+	text-shadow:
+		0px 3px 0px #d73636,
+		0px 6px 4px rgba(0, 0, 0, 0.3);
+}
+
+.puffy-text-green {
+	text-shadow:
+		0px 3px 0px #16a34a,
+		0px 6px 4px rgba(0, 0, 0, 0.3);
+}

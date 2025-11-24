@@ -5,7 +5,7 @@ export type PlayerColors = Record<number, string>;
 export type FeedbackState = "correct" | "wrong" | null;
 
 export interface Question {
-	id: number,
+	id: number;
 	question: string;
 	options: string[];
 	correct: string;

@@ -1,5 +1,6 @@
 import { Award, HelpCircle, Play, RotateCcw, X } from "lucide-react";
 import { useState } from "react";
+import { PuffyButton } from "./components/puffy-button";
 import { QUESTIONS } from "./questions";
 import type {
 	FeedbackState,
@@ -13,9 +14,9 @@ import type {
 import { shuffleArray } from "./utils";
 
 const GAME_MODES: GameModes = {
-	curto: { label: "Curto (3 rodadas)", rounds: 3 },
-	medio: { label: "Médio (5 rodadas)", rounds: 5 },
-	longo: { label: "Longo (10 rodadas)", rounds: 10 },
+	curto: { label: "Curto", rounds: 3 },
+	medio: { label: "Médio", rounds: 5 },
+	longo: { label: "Longo", rounds: 10 },
 };
 
 const PLAYER_COLORS: PlayerColors = {
@@ -30,6 +31,46 @@ const PLAYER_COLORS: PlayerColors = {
 	8: "bg-amber-500 ring-amber-400",
 	9: "bg-violet-500 ring-violet-400",
 };
+
+const StarIcon = ({ className }: { className?: string }) => (
+	<svg
+		xmlns="http://www.w3.org/2000/svg"
+		viewBox="0 0 24 24"
+		fill="#FCD34D"
+		stroke="#F59E0B"
+		strokeWidth="2"
+		className={className}
+		style={{ filter: "drop-shadow(0px 2px 0px #ca8a04)" }}
+	>
+		<path
+			strokeLinecap="round"
+			strokeLinejoin="round"
+			d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.385a.563.563 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"
+		/>
+	</svg>
+);
+
+const PawnIcon = ({
+	className,
+	color,
+}: {
+	className?: string;
+	color: string;
+}) => (
+	<svg
+		xmlns="http://www.w3.org/2000/svg"
+		viewBox="0 0 24 24"
+		fill={color}
+		className={className}
+		style={{ filter: "drop-shadow(0px 3px 0px rgba(0,0,0,0.2))" }}
+	>
+		<path
+			d="M12 2a3 3 0 0 0-3 3c0 1.657 1.343 3 3 3s3-1.343 3-3a3 3 0 0 0-3-3zm0 7c-2.5 0-4.71 1.18-6 3l1 8h10l1-8c-1.29-1.82-3.5-3-6-3z"
+			stroke="rgba(0,0,0,0.1)"
+			strokeWidth="1"
+		/>
+	</svg>
+);
 
 const App = () => {
 	const [screen, setScreen] = useState<ScreenState>("home");
@@ -123,30 +164,62 @@ const App = () => {
 
 	const renderHome = () => (
 		<div className="relative w-full h-full flex flex-col items-center justify-center p-6 overflow-hidden">
-			{/* Fundo de 4 Quadrantes */}
-			<div className="absolute top-0 left-0 w-1/2 h-1/2 bg-yellow-400 z-0"></div>
-			<div className="absolute top-0 right-0 w-1/2 h-1/2 bg-blue-500 z-0"></div>
-			<div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-green-500 z-0"></div>
-			<div className="absolute bottom-0 right-0 w-1/2 h-1/2 bg-red-500 z-0"></div>
+			{/* Fundo de 4 Quadrantes com Textura e Ícones */}
+			<div className="absolute top-0 left-0 w-full h-full z-0">
+				{/* Quadrante Amarelo */}
+				<div className="absolute top-0 left-0 w-1/2 h-1/2 bg-[#FCD34D] overflow-hidden">
+					<StarIcon className="absolute top-10 left-10 w-12 h-12 opacity-80" />
+					<StarIcon className="absolute bottom-20 left-5 w-8 h-8 opacity-70" />
+				</div>
+				{/* Quadrante Azul */}
+				<div className="absolute top-0 right-0 w-1/2 h-1/2 bg-[#3B82F6] overflow-hidden">
+					<StarIcon className="absolute top-32 right-5 w-10 h-10 opacity-80" />
+					<PawnIcon
+						color="#EF4444"
+						className="absolute bottom-5 right-10 w-16 h-16 opacity-90"
+					/>
+				</div>
+				{/* Quadrante Verde */}
+				<div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-[#22C55E] overflow-hidden">
+					<PawnIcon
+						color="#3B82F6"
+						className="absolute top-10 left-8 w-14 h-14 opacity-90"
+					/>
+					<StarIcon className="absolute top-5 left-24 w-8 h-8 opacity-70" />
+					<StarIcon className="absolute bottom-10 left-10 w-12 h-12 opacity-80" />
+				</div>
+				{/* Quadrante Vermelho */}
+				<div className="absolute bottom-0 right-0 w-1/2 h-1/2 bg-[#EF4444] overflow-hidden">
+					<PawnIcon
+						color="#22C55E"
+						className="absolute bottom-8 right-16 w-16 h-16 opacity-90"
+					/>
+					<PawnIcon
+						color="#FCD34D"
+						className="absolute bottom-16 right-5 w-12 h-12 opacity-80"
+					/>
+					<StarIcon className="absolute top-20 right-10 w-10 h-10 opacity-80" />
+				</div>
+			</div>
 
 			{/* Conteúdo */}
 			<div className="z-10 w-full max-w-md flex flex-col items-center gap-6">
-				<h1
-					className="text-5xl font-playful font-black text-white text-center drop-shadow-[0_5px_5px_rgba(0,0,0,0.5)] leading-tight mb-4"
-					style={{
-						textShadow:
-							"2px 2px 0 #000000, -2px -2px 0 #000000, 2px -2px 0 #000000, -2px 2px 0 #000000",
-					}}
-				>
-					<span className="text-6xl md:text-7xl">Horizonte</span>
-					<br />
-					de
-					<br />
-					<span className="text-6xl md:text-7xl">Tabuleiro</span>
+				<h1 className="text-6xl md:text-7xl font-black font-playful text-center leading-none tracking-wide drop-shadow-xl mb-6">
+					<span className="text-[#ff5c5c] puffy-text-red block">Horizonte</span>
+					<p className="text-white puffy-text text-4xl md:text-5xl my-2">de</p>
+					<span className="text-[#3B82F6] puffy-text-blue inline-block">
+						Ta
+					</span>
+					<span className="text-[#22C55E] puffy-text-green inline-block">
+						bu
+					</span>
+					<span className="text-[#FCD34D] puffy-text-yellow inline-block">
+						leiro
+					</span>
 				</h1>
 
 				{/* Painel de Configuração */}
-				<div className="bg-white/90 backdrop-blur-sm p-6 rounded-3xl shadow-xl w-full space-y-4 border-2 border-black">
+				<div className="bg-white/90 backdrop-blur-sm p-6 rounded-3xl shadow-xl w-full space-y-4">
 					<div>
 						<label className="block text-gray-800 font-bold mb-1">
 							Jogadores:
@@ -168,34 +241,36 @@ const App = () => {
 						<label className="block text-gray-800 font-bold mb-1">
 							Duração:
 						</label>
-						<select
-							value={gameMode}
-							onChange={(e) => setGameMode(e.target.value as GameModeKey)}
-							className="w-full p-3 rounded-xl border-2 border-gray-300 focus:border-blue-500 outline-none font-bold"
-						>
+						<div className="flex gap-2">
 							{Object.entries(GAME_MODES).map(([key, val]) => (
-								<option key={key} value={key}>
+								<label
+									key={key}
+									className={`w-full flex items-center justify-center gap-2 px-3 py-2 rounded-xl border-2 font-bold cursor-pointer ${gameMode === key ? "border-blue-600 bg-blue-50" : "border-gray-300"}`}
+								>
+									<input
+										type="radio"
+										name="game-mode"
+										value={key}
+										checked={gameMode === (key as GameModeKey)}
+										onChange={(e) => setGameMode(e.target.value as GameModeKey)}
+										className="sr-only"
+									/>
 									{val.label}
-								</option>
+								</label>
 							))}
-						</select>
+						</div>
 					</div>
 				</div>
 
-				{/* Botões Principais */}
-				<button
-					onClick={startGame}
-					className="w-full bg-white text-black text-xl font-bold py-4 rounded-full shadow-lg flex items-center justify-center gap-2 border-2 border-black hover:scale-105 transition-transform active:scale-95"
-				>
-					<Play size={24} fill="black" /> Jogar
-				</button>
+				<div className="w-full max-w-xs flex flex-col gap-4 mt-8">
+					<PuffyButton onClick={startGame} color="blue">
+						<Play size={32} fill="white" /> Jogar
+					</PuffyButton>
 
-				<button
-					onClick={() => setShowModal(true)}
-					className="w-full bg-white text-black text-xl font-bold py-4 rounded-full shadow-lg flex items-center justify-center gap-2 border-2 border-black hover:scale-105 transition-transform active:scale-95"
-				>
-					<HelpCircle size={24} /> Como jogar
-				</button>
+					<PuffyButton onClick={() => setShowModal(true)} color="cyan">
+						<HelpCircle size={28} /> Como jogar
+					</PuffyButton>
+				</div>
 			</div>
 		</div>
 	);
@@ -320,18 +395,21 @@ const App = () => {
 					))}
 				</div>
 				<div className="flex gap-3">
-					<button
+					<PuffyButton
 						onClick={() => setScreen("home")}
-						className="w-1/2 bg-white text-black text-xl font-bold py-3 rounded-full shadow-lg border-2 border-black"
+						color="white"
+						size="sm"
+						className="w-full"
 					>
 						Voltar
-					</button>
-					<button
+					</PuffyButton>
+					<PuffyButton
 						onClick={beginGameFromSetup}
-						className="w-1/2 bg-black text-white text-xl font-bold py-3 rounded-full shadow-lg border-2 border-black"
+						size="sm"
+						className="w-full"
 					>
 						Continuar
-					</button>
+					</PuffyButton>
 				</div>
 			</div>
 		</div>
