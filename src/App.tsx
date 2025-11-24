@@ -134,18 +134,10 @@ const App = () => {
 
 			{/* Conteúdo */}
 			<div className="z-10 w-full max-w-md flex flex-col items-center gap-6">
-				<h1 className="text-6xl md:text-7xl font-black font-playful text-center leading-none tracking-wide drop-shadow-xl mb-6">
-					<span className="text-[#ff5c5c] puffy-text-red block">Horizonte</span>
-					<p className="text-white puffy-text text-4xl md:text-5xl my-2">de</p>
-					<span className="text-[#3B82F6] puffy-text-blue inline-block">
-						Ta
-					</span>
-					<span className="text-[#22C55E] puffy-text-green inline-block">
-						bu
-					</span>
-					<span className="text-[#FCD34D] puffy-text-yellow inline-block">
-						leiro
-					</span>
+				<h1 className="text-6xl md:text-7xl puffy-text text-white font-black font-playful text-center leading-none tracking-wide drop-shadow-xl mb-6">
+					<span>Horizonte</span>
+					<p className="text-4xl md:text-5xl my-2">de</p>
+					<span>Tabuleiro</span>
 				</h1>
 
 				{/* Painel de Configuração */}
