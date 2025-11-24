@@ -113,7 +113,170 @@ export const QUESTIONS: Question[] = [
 	},
 	{
 		question: "Qual é o símbolo químico da água?",
-		options: ["Ho2", "Ah2", "O2H"],
-		correct: "H2O",
+		options: ["HO₂", "Ah₂", "O₂H"],
+		correct: "H₂O",
+	},
+	{
+		question: "O que produz a cor verde da maioria das folhas das plantas?",
+		options: ["Refração da luz", "Pigmentos naturais", "Radiação UV"],
+		correct: "Clorofila",
+	},
+	{
+		question: "O Sol é considerado uma estrela.",
+		options: ["Falso"],
+		correct: "Verdadeiro",
+	},
+	{
+		question: "Qual é o planeta mais quente do sistema solar?",
+		options: ["Júpiter", "Mercúrio", "Marte"],
+		correct: "Vênus",
+	},
+	{
+		question:
+			"Qual animal participa do experimento mental mais famoso de Schrödinger?",
+		options: ["Cachorro", "Morcego", "Borboleta"],
+		correct: "Gato",
+	},
+	{
+		question: "A Terra orbita o Sol em um ano.",
+		options: ["Falso"],
+		correct: "Verdadeiro",
+	},
+	{
+		question: "Todos os planetas do Sistema Solar orbitam o Sol.",
+		options: ["Falso"],
+		correct: "Verdadeiro",
+	},
+	{
+		question: "A Terra e a Lua têm aproximadamente a mesma massa.",
+		options: ["Verdadeiro"],
+		correct: "Falso",
+	},
+	{
+		question: "Um humano comum pode ficar duas semanas sem água.",
+		options: ["Verdadeiro"],
+		correct: "Falso",
+	},
+	{
+		question: "Qual é a camada mais fina e externa da Terra?",
+		options: ["Exosfera", "Manto", "Núcleo Externo"],
+		correct: "Crosta",
+	},
+	{
+		question: "Quem foi o primeiro presidente do Brasil?",
+		options: ["Getúlio Vargas", "Dom Pedro II", "Juscelino Kubitschek"],
+		correct: "Deodoro da Fonseca",
+	},
+	{
+		question: "Qual é o maior oceano do mundo?",
+		options: ["Atlântico", "Índico", "Ártico"],
+		correct: "Pacífico",
+	},
+	{
+		question: "Que gás os seres humanos soltam ao respirar?",
+		options: ["Oxigênio", "Hélio", "Hidrogênio"],
+		correct: "Gás carbônico (CO₂)",
+	},
+	{
+		question: "Qual é o continente onde fica o Egito?",
+		options: ["Europa", "América", "Oceania"],
+		correct: "África",
+	},
+	{
+		question: "Qual é o maior deserto quente do mundo?",
+		options: ["Deserto do Atacama", "Deserto da Arábia", "Deserto de Gobi"],
+		correct: "Deserto do Saara",
+	},
+	{
+		question: "O que as abelhas produzem?",
+		options: ["Chocolate", "Leite", "Farinha"],
+		correct: "Mel",
+	},
+	{
+		question:
+			"Qual é o nome do processo pelo qual as plantas produzem alimento?",
+		options: ["Digestão", "Filtração", "Evaporação"],
+		correct: "Fotossíntese",
+	},
+	{
+		question: "Que instrumento mede a temperatura?",
+		options: ["Barômetro", "Higrômetro", "Anemômetro"],
+		correct: "Termômetro",
+	},
+	{
+		question: "Qual é o planeta conhecido como 'Planeta Vermelho'?",
+		options: ["Vênus", "Júpiter", "Saturno"],
+		correct: "Marte",
+	},
+	{
+		question: "Que animal é conhecido como o 'Rei da Selva'?",
+		options: ["Tigre", "Hiena", "Leopardo"],
+		correct: "Leão",
+	},
+	{
+		question: "Que fenômeno natural causa trovões e relâmpagos?",
+		options: ["Neve", "Vento", "Chuva leve"],
+		correct: "Tempestade",
+	},
+	{
+		question: "Qual é a figura geométrica que possui três lados?",
+		options: ["Quadrado", "Círculo", "Pentágono"],
+		correct: "Triângulo",
+	},
+	{
+		question:
+			"O que os astrônomos usam para observar objetos distantes no espaço?",
+		options: ["Binóculos", "Lupa", "Microscópio"],
+		correct: "Telescópio",
+	},
+	{
+		question: "Que órgão do corpo humano bombeia o sangue?",
+		options: ["Fígado", "Pulmões", "Rins"],
+		correct: "Coração",
+	},
+	{
+		question: "Qual o menor estado do Brasil em território?",
+		options: ["Alagoas", "Sergipe", "Rio de Janeiro"],
+		correct: "Sergipe",
+	},
+	{
+		question: "Qual é o único satélite natural da Terra?",
+		options: ["Europa", "Io", "Titã"],
+		correct: "Lua",
+	},
+	{
+		question: "Que instrumento mede a velocidade do vento?",
+		options: ["Termômetro", "Higrômetro", "Barômetro"],
+		correct: "Anemômetro",
+	},
+	{
+		question: "O que causa as estações do ano?",
+		options: ["Fases da Lua", "Tamanho do Sol", "Variação da distância da Lua"],
+		correct: "Inclinação do eixo da Terra",
+	},
+	{
+		question: "Qual é o nome da galáxia onde vivemos?",
+		options: ["Andrômeda", "Sombrero", "Nuvem de Magalhães"],
+		correct: "Via Láctea",
+	},
+	{
+		question: "Qual é a montanha mais alta do mundo?",
+		options: ["Monte Kilimanjaro", "Monte Fuji", "Monte Aconcágua"],
+		correct: "Monte Everest",
+	},
+	{
+		question: "Qual o nome do processo de transformação da água em vapor?",
+		options: ["Solidificação", "Condensação", "Fusão"],
+		correct: "Evaporação",
+	},
+	{
+		question: "Em qual continente fica o Brasil?",
+		options: ["Ásia", "Europa", "África"],
+		correct: "América do Sul",
+	},
+	{
+		question: "Qual planeta tem os anéis mais famosos do Sistema Solar?",
+		options: ["Netuno", "Urano", "Júpiter"],
+		correct: "Saturno",
 	},
 ].map((question, i) => ({ id: i + 1, ...question }));
