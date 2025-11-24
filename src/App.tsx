@@ -45,6 +45,9 @@ const App = () => {
 	const [currentQuestion, setCurrentQuestion] = useState<Question | null>(null);
 	const [answeredQuestions, setAnsweredQuestions] = useState<number[]>([]);
 	const [feedback, setFeedback] = useState<FeedbackState>(null);
+	const [pendingNames, setPendingNames] = useState<string[]>([]);
+
+	console.log(answeredQuestions);
 
 	const questions = useMemo(
 		() =>
@@ -54,18 +57,24 @@ const App = () => {
 		[answeredQuestions],
 	);
 
-	console.log(answeredQuestions);
-
 	const startGame = () => {
-		const newPlayers = Array.from({ length: playerCount }, (_, i) => ({
-			id: i,
-			name: `Jogador ${i + 1}`,
-			score: 0,
-		}));
+		const defaults = Array.from(
+			{ length: playerCount },
+			(_, i) => `Jogador ${i + 1}`,
+		);
+		setPendingNames(defaults);
+		setScreen("setup");
+	};
 
+	const beginGameFromSetup = () => {
+		const names = Array.from({ length: playerCount }, (_, i) => {
+			const n = pendingNames[i];
+			return (n && n.trim()) || `Jogador ${i + 1}`;
+		});
+		const newPlayers = names.map((name, i) => ({ id: i, name, score: 0 }));
 		setPlayers(newPlayers);
 		setTotalRounds(GAME_MODES[gameMode].rounds * playerCount);
-		setCurrentRound(0); // Contador de turnos totais
+		setCurrentRound(0);
 		setCurrentPlayerIdx(0);
 		nextQuestion();
 		setScreen("game");
@@ -82,9 +91,9 @@ const App = () => {
 
 		setFeedback(isCorrect ? "correct" : "wrong");
 		setAnsweredQuestions((prev) => {
-			const answeredQuestions = [...prev, currentQuestion.id];
-			if (answeredQuestions.length < QUESTIONS.length) return answeredQuestions;
-			return answeredQuestions.slice(Math.floor(answeredQuestions.length / 2));
+			const questions = [...prev, currentQuestion.id];
+			if (questions.length < QUESTIONS.length) return questions;
+			return questions.slice(Math.floor(questions.length / 2));
 		});
 
 		// Aguarda um pouco para mostrar o feedback visual antes de trocar
@@ -259,7 +268,7 @@ const App = () => {
 						>
 							<div className="flex items-center gap-3">
 								<span
-									className={`font-bold w-8 h-8 flex items-center justify-center rounded-full ${idx === 0 ? "bg-yellow-400 text-black" : "bg-gray-200 text-gray-600"}`}
+									className={`w-8 h-8 rounded-full ring-4 flex items-center justify-center text-white font-bold ${PLAYER_COLORS[idx]}`}
 								>
 									{idx + 1}
 								</span>
@@ -279,6 +288,54 @@ const App = () => {
 			</div>
 		);
 	};
+
+	const renderSetup = () => (
+		<div className="w-full h-full bg-gray-100">
+			<div className="max-w-md mx-auto flex flex-col p-4 pt-12 gap-6">
+				<h2 className="text-3xl font-black text-gray-800 text-center">
+					Nomes dos Jogadores
+				</h2>
+				<div className="bg-white p-6 rounded-3xl shadow-lg border-b-4 border-gray-200 space-y-4">
+					{Array.from({ length: playerCount }, (_, i) => (
+						<div key={i} className="flex items-center gap-3">
+							<span
+								className={`w-8 h-8 rounded-full ring-4 flex items-center justify-center text-white font-bold ${PLAYER_COLORS[i]}`}
+							>
+								{i + 1}
+							</span>
+							<input
+								type="text"
+								value={pendingNames[i] ?? `Jogador ${i + 1}`}
+								onChange={(e) => {
+									setPendingNames((prev) => {
+										const arr = [...prev];
+										arr[i] = e.target.value;
+										return arr;
+									});
+								}}
+								className="flex-1 p-3 rounded-xl border-2 border-gray-300 focus:border-blue-500 outline-none font-bold"
+								placeholder={`Jogador ${i + 1}`}
+							/>
+						</div>
+					))}
+				</div>
+				<div className="flex gap-3">
+					<button
+						onClick={() => setScreen("home")}
+						className="w-1/2 bg-white text-black text-xl font-bold py-3 rounded-full shadow-lg border-2 border-black"
+					>
+						Voltar
+					</button>
+					<button
+						onClick={beginGameFromSetup}
+						className="w-1/2 bg-black text-white text-xl font-bold py-3 rounded-full shadow-lg border-2 border-black"
+					>
+						Continuar
+					</button>
+				</div>
+			</div>
+		</div>
+	);
 
 	const renderModal = () => {
 		if (!showModal) return null;
@@ -332,6 +389,7 @@ const App = () => {
 	return (
 		<div className="w-screen h-screen flex items-center justify-center font-sans">
 			{screen === "home" && renderHome()}
+			{screen === "setup" && renderSetup()}
 			{screen === "game" && renderGame()}
 			{screen === "score" && renderScore()}
 			{renderModal()}

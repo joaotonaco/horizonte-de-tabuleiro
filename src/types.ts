@@ -1,4 +1,4 @@
-export type ScreenState = "home" | "game" | "score";
+export type ScreenState = "home" | "setup" | "game" | "score";
 export type GameModeKey = "curto" | "medio" | "longo";
 export type GameModes = Record<GameModeKey, GameModeConfig>;
 export type PlayerColors = Record<number, string>;
