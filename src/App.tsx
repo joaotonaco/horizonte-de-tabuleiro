@@ -1,5 +1,5 @@
 import { Award, HelpCircle, Play, RotateCcw, X } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { QUESTIONS } from "./questions";
 import type {
 	FeedbackState,
@@ -47,16 +47,6 @@ const App = () => {
 	const [feedback, setFeedback] = useState<FeedbackState>(null);
 	const [pendingNames, setPendingNames] = useState<string[]>([]);
 
-	console.log(answeredQuestions);
-
-	const questions = useMemo(
-		() =>
-			QUESTIONS.filter(({ id }) => !answeredQuestions.includes(id)).map(
-				(q) => ({ ...q, options: shuffleArray([...q.options, q.correct]) }),
-			),
-		[answeredQuestions],
-	);
-
 	const startGame = () => {
 		const defaults = Array.from(
 			{ length: playerCount },
@@ -76,12 +66,21 @@ const App = () => {
 		setTotalRounds(GAME_MODES[gameMode].rounds * playerCount);
 		setCurrentRound(0);
 		setCurrentPlayerIdx(0);
-		nextQuestion();
+		nextQuestion([]);
 		setScreen("game");
 	};
 
-	const nextQuestion = () => {
-		setCurrentQuestion(questions[Math.floor(Math.random() * questions.length)]);
+	const nextQuestion = (answeredQuestions: number[]) => {
+		const questions = QUESTIONS.filter(
+			(q) => !answeredQuestions.includes(q.id),
+		);
+		const nextQuestion =
+			questions[Math.floor(Math.random() * questions.length)];
+
+		setCurrentQuestion({
+			...nextQuestion,
+			options: shuffleArray([...nextQuestion.options, nextQuestion.correct]),
+		});
 		setFeedback(null);
 	};
 
@@ -89,12 +88,13 @@ const App = () => {
 		if (!currentQuestion) return;
 		const isCorrect = option === currentQuestion.correct;
 
+		let answered = [...answeredQuestions, currentQuestion.id];
+		if (answered.length >= QUESTIONS.length) {
+			answered = answered.slice(Math.floor(answered.length / 2));
+		}
+
 		setFeedback(isCorrect ? "correct" : "wrong");
-		setAnsweredQuestions((prev) => {
-			const questions = [...prev, currentQuestion.id];
-			if (questions.length < QUESTIONS.length) return questions;
-			return questions.slice(Math.floor(questions.length / 2));
-		});
+		setAnsweredQuestions(answered);
 
 		// Aguarda um pouco para mostrar o feedback visual antes de trocar
 		setTimeout(() => {
@@ -111,7 +111,7 @@ const App = () => {
 			} else {
 				setCurrentRound(nextTurn);
 				setCurrentPlayerIdx((prev) => (prev + 1) % playerCount);
-				nextQuestion();
+				nextQuestion(answered);
 			}
 		}, 1000);
 	};

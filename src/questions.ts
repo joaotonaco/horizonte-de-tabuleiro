@@ -116,4 +116,4 @@ export const QUESTIONS: Question[] = [
 		options: ["Ho2", "Ah2", "O2H"],
 		correct: "H2O",
 	},
-].map((question, i) => ({ ...question, id: i + 1 }));
+].map((question, i) => ({ id: i + 1, ...question }));
