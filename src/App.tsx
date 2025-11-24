@@ -465,7 +465,7 @@ const App = () => {
 	};
 
 	return (
-		<div className="w-screen h-screen flex items-center justify-center font-sans">
+		<div className="w-screen h-svh flex items-center justify-center font-sans">
 			{screen === "home" && renderHome()}
 			{screen === "setup" && renderSetup()}
 			{screen === "game" && renderGame()}
