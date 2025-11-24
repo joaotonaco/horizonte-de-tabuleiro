@@ -12,4 +12,7 @@ export default defineConfig({
 		}),
 		tailwindcss(),
 	],
+	preview: {
+		allowedHosts: ["horizontedetabuleiro.squareweb.app"],
+	},
 });
